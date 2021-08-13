@@ -4,7 +4,7 @@ The only thing a user has to add is a list of subnets in the variables.tf file (
 These subnets are made available to a VMware cluster so that an admin only has to go ahead and move the vNICs of their workloads to the correct Port Group. 
 Their workloads will have external connectivity via a shared L3out. An additional benefit is that this plan will use random identifiers for each object and leverage the alias and description fields to include naming.
 
-The plan included in this repository includes the following:
+The plan in this repository includes the following:
 
 Cisco ACI:
 1. Create a new Tenant with a random ID
