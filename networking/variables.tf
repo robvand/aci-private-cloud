@@ -21,7 +21,7 @@ variable "bridge_domains" {
       arp_flood     = "yes"
       ip_learning   = "yes"
       unicast_route = "yes"
-      subnet        = "1.1.31.1/24"
+      subnet        = "1.1.30.1/24"
       name_alias    = "frontend_services"
       subnet_scope = [
       "private"]
