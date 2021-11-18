@@ -170,7 +170,7 @@ data "aci_tenant" "common_tenant" {
   name = var.common_tenant
 }
 
-#Commong L3out read
+#Common L3out read
 data "aci_l3_outside" "common_l3_out" {
   tenant_dn = data.aci_tenant.common_tenant.id
   name = var.common_l3_out
