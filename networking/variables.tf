@@ -36,6 +36,16 @@ variable "bridge_domains" {
       subnet_scope = [
       "private"]
     },
+    bd-4 = {
+      description   = "Web/Apache Front End bridge"
+      arp_flood     = "yes"
+      ip_learning   = "yes"
+      unicast_route = "yes"
+      subnet        = "1.1.50.1/24"
+      name_alias    = "joep_services"
+      subnet_scope = [
+      "private"]
+    },
   }
 }
 #Name of the VMM domain that the EPGs should be published to
