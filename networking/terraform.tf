@@ -2,7 +2,7 @@ terraform {
   required_providers {
     aci = {
       source  = "CiscoDevNet/aci"
-      version = "0.7.1"
+      version = "1.0.1"
     }
     random = {
       source  = "hashicorp/random"
