@@ -5,9 +5,6 @@ provider "aci" {
   insecure = true
 }
 
-provider "random" {
-}
-
 #Tenant creation
 resource "random_string" "tenant_1" {
   length  = 16
@@ -255,30 +252,30 @@ resource "aci_filter_entry" "external_routing_filter_entry" {
     stateful      = "no"
 }
 
-#Exporting the external routing contracts to common (contract export in TF?)
-resource "aci_rest" "tenant_rest" {
-  depends_on = [
-    aci_contract.external_routing,
-    aci_external_network_instance_profile.network_instance_profile,
-  ]
-  for_each = aci_application_epg.epg
-  path = "/api/node/mo/uni/tn-${data.aci_tenant.common_tenant.name}.json"
-  payload = <<EOF
-{
-  "vzCPIf": {
-    "attributes":{
-      "dn":"uni/tn-${data.aci_tenant.common_tenant.name}/cif-${aci_application_epg.epg[each.key].name}",
-      "name":"${aci_application_epg.epg[each.key].name}",
-      "descr":"automated external routing",
-      "rn":"cif-${aci_application_epg.epg[each.key].name}"},
-      "children":[{
-        "vzRsIf":{
-          "attributes":{
-            "tDn":"uni/tn-${aci_tenant.tenant_1.name}/brc-${aci_contract.external_routing[each.key].name}"},
-      "children":[]}}]}}
-}
-EOF
-}
+# #Exporting the external routing contracts to common (contract export in TF?)
+# resource "aci_rest" "tenant_rest" {
+#   depends_on = [
+#     aci_contract.external_routing,
+#     aci_external_network_instance_profile.network_instance_profile,
+#   ]
+#   for_each = aci_application_epg.epg
+#   path = "/api/node/mo/uni/tn-${data.aci_tenant.common_tenant.name}.json"
+#   payload = <<EOF
+# {
+#   "vzCPIf": {
+#     "attributes":{
+#       "dn":"uni/tn-${data.aci_tenant.common_tenant.name}/cif-${aci_application_epg.epg[each.key].name}",
+#       "name":"${aci_application_epg.epg[each.key].name}",
+#       "descr":"automated external routing",
+#       "rn":"cif-${aci_application_epg.epg[each.key].name}"},
+#       "children":[{
+#         "vzRsIf":{
+#           "attributes":{
+#             "tDn":"uni/tn-${aci_tenant.tenant_1.name}/brc-${aci_contract.external_routing[each.key].name}"},
+#       "children":[]}}]}}
+# }
+# EOF
+# }
 
 #Providing the external routing contracts to each EPG
 resource "aci_epg_to_contract" "aci_epgs_to_common" {
