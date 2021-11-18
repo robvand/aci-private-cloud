@@ -27,7 +27,7 @@ variable "bridge_domains" {
       "private"]
     },
     bd-3 = {
-      description   = "Web/Apache Front End bridge"
+      description   = "Backend services"
       arp_flood     = "yes"
       ip_learning   = "yes"
       unicast_route = "yes"
